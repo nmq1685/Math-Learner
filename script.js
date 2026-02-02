@@ -1,72 +1,146 @@
 // CONFIGURATION & DATA
 const APP_DATA = {
-    sections: [
+    grades: [
         {
-            id: 'addition',
-            title: { en: 'Addition', vi: 'Phép Cộng', ru: 'Сложение' },
-            icon: '+',
-            styleRef: 'addition',
-            desc: { en: 'Count and add numbers', vi: 'Từ đếm ngón tay đến tính nhẩm', ru: 'Считаем и складываем числа' },
-            levels: [
-                { id: 1, title: 'Level 1', desc: { vi: 'Cộng trong phạm vi 10', en: 'Sum within 10', ru: 'Сумма до 10' } },
-                { id: 2, title: 'Level 2', desc: { vi: 'Cộng phạm vi 20 (Không nhớ)', en: 'Within 20 (No regrouping)', ru: 'До 20 (без перехода через десяток)' } },
-                { id: 3, title: 'Level 3', desc: { vi: 'Cộng phạm vi 20 (Có nhớ)', en: 'Within 20 (Regrouping)', ru: 'До 20 (с переходом через десяток)' } },
-                { id: 4, title: 'Level 4', desc: { vi: 'Cộng tròn chục (đến 100)', en: 'Multiples of 10', ru: 'Круглые десятки (до 100)' } },
-                { id: 5, title: 'Level 5', desc: { vi: 'Cộng 2 chữ số (Không nhớ)', en: '2-digit (No regrouping)', ru: 'Двузначные (без перехода)' } },
-                { id: 6, title: 'Level 6', desc: { vi: 'Cộng 2 chữ số (Có nhớ)', en: '2-digit (Regrouping)', ru: 'Двузначные (с переходом)' } }
+            id: 'grade1',
+            title: { vi: 'Lớp 1', en: 'Grade 1', ru: '1 класс' },
+            icon: '👶',
+            styleRef: 'grade1',
+            desc: { vi: 'Làm quen với số & phép tính cơ bản', en: 'Introduction to numbers & basic operations', ru: 'Знакомство с числами' },
+            sections: [
+                {
+                    id: 'g1_number',
+                    title: { vi: 'Số học', en: 'Number Sense', ru: 'Числа' },
+                    levels: [
+                        { id: 'g1_n1', title: { vi: 'Đếm số', en: 'Counting', ru: 'Счет' }, desc: { vi: 'Điền số còn thiếu', en: 'Missing numbers', ru: 'Пропущенные числа' } },
+                        { id: 'g1_n2', title: { vi: 'So sánh', en: 'Comparison', ru: 'Сравнение' }, desc: { vi: 'Lớn, bé, bằng (<100)', en: 'Greater/Less than (<100)', ru: 'Сравнение до 100' } },
+                        { id: 'g1_n3', title: { vi: 'Sắp xếp', en: 'Ordering', ru: 'Порядок' }, desc: { vi: 'Thứ tự từ bé đến lớn', en: 'Ascending/Descending', ru: 'По возрастанию' } }
+                    ]
+                },
+                {
+                    id: 'g1_ops',
+                    title: { vi: 'Phép tính', en: 'Operations', ru: 'Операции' },
+                    levels: [
+                        { id: 'g1_o1', title: { vi: 'Phạm vi 10', en: 'Range 10', ru: 'До 10' }, desc: { vi: 'Cộng/Trừ cơ bản', en: 'Basic Add/Sub', ru: 'Сложение и вычитание' } },
+                        { id: 'g1_o2', title: { vi: 'Phạm vi 20', en: 'Range 20', ru: 'До 20' }, desc: { vi: 'Cộng/Trừ không nhớ', en: 'No carrying/borrowing', ru: 'Без перехода' } },
+                        { id: 'g1_o3', title: { vi: 'Tròn chục', en: 'Tens', ru: 'Десятки' }, desc: { vi: 'Cộng/Trừ tròn chục (<100)', en: 'Multiples of 10', ru: 'Круглые десятки' } },
+                        { id: 'g1_o4', title: { vi: 'Phạm vi 100', en: 'Range 100', ru: 'До 100' }, desc: { vi: 'Cộng/Trừ không nhớ', en: 'No carrying/borrowing', ru: 'Без перехода' } }
+                    ]
+                },
+                {
+                    id: 'g1_geo',
+                    title: { vi: 'Hình học & Đo lường', en: 'Geometry & Measure', ru: 'Геометрия' },
+                    levels: [
+                        { id: 'g1_g1', title: { vi: 'Đồng hồ', en: 'Clock', ru: 'Часы' }, desc: { vi: 'Đọc giờ đúng', en: 'Tell time', ru: 'Линейное время' } },
+                        { id: 'g1_g2', title: { vi: 'Độ dài', en: 'Length', ru: 'Длина' }, desc: { vi: 'Cộng trừ đơn vị cm', en: 'Add/Sub cm units', ru: 'Сантиметры' } }
+                    ]
+                }
             ]
         },
         {
-            id: 'subtraction',
-            title: { en: 'Subtraction', vi: 'Phép Trừ', ru: 'Вычитание' },
-            icon: '-',
-            styleRef: 'subtraction',
-            desc: { en: 'Take away numbers', vi: 'Hiểu về bớt đi, hiệu số', ru: 'Учимся вычитать' },
-            levels: [
-                { id: 1, title: 'Level 1', desc: { vi: 'Trừ trong phạm vi 10', en: 'Subtract within 10', ru: 'Вычитание до 10' } },
-                { id: 2, title: 'Level 2', desc: { vi: 'Trừ phạm vi 20 (Không nhớ)', en: 'Within 20 (No regrouping)', ru: 'До 20 (без перехода)' } },
-                { id: 3, title: 'Level 3', desc: { vi: 'Trừ qua mốc 10 (Có nhớ)', en: 'Crossing 10 (Regrouping)', ru: 'Через десяток (с переходом)' } },
-                { id: 4, title: 'Level 4', desc: { vi: 'Trừ tròn chục', en: 'Multiples of 10', ru: 'Круглые десятки' } },
-                { id: 5, title: 'Level 5', desc: { vi: 'Trừ 2 chữ số (Không nhớ)', en: '2-digit (No regrouping)', ru: 'Двузначные (без перехода)' } },
-                { id: 6, title: 'Level 6', desc: { vi: 'Trừ 2 chữ số (Có nhớ)', en: '2-digit (Regrouping)', ru: 'Двузначные (с переходом)' } }
+            id: 'grade2',
+            title: { vi: 'Lớp 2', en: 'Grade 2', ru: '2 класс' },
+            icon: '🐣',
+            styleRef: 'grade2',
+            desc: { vi: 'Phép tính có nhớ & nhân chia', en: 'Regrouping & Multiplication', ru: 'Сложение и деление' },
+            sections: [
+                {
+                    id: 'g2_ops_adv',
+                    title: { vi: 'Phép tính nâng cao', en: 'Advanced Ops', ru: 'Сложные операции' },
+                    levels: [
+                        { id: 'g2_o1', title: { vi: 'Cộng có nhớ', en: 'Addition carrying', ru: 'Сложение с переходом' }, desc: { vi: 'Phạm vi 100', en: 'Within 100', ru: 'До 100' } },
+                        { id: 'g2_o2', title: { vi: 'Trừ có nhớ', en: 'Subtraction borrowing', ru: 'Вычитание с переходом' }, desc: { vi: 'Phạm vi 100', en: 'Within 100', ru: 'До 100' } },
+                        { id: 'g2_o3', title: { vi: 'Tìm thành phần', en: 'Find x', ru: 'Найти x' }, desc: { vi: 'Tìm x trong phép cộng/trừ', en: 'Find missing part in +/-', ru: 'Поиск неизвестного' } }
+                    ]
+                },
+                {
+                    id: 'g2_mul_div',
+                    title: { vi: 'Nhân & Chia cơ bản', en: 'Mul & Div 1', ru: 'Умножение и деление' },
+                    levels: [
+                        { id: 'g2_m1', title: { vi: 'Bảng nhân 2-5', en: 'Tables 2-5', ru: 'Таблицы 2-5' }, desc: { vi: 'Thực hành nhân cơ bản', en: 'Basic multiplication', ru: 'Умножение' } },
+                        { id: 'g2_m2', title: { vi: 'Bảng chia 2-5', en: 'Div Tables 2-5', ru: 'Деление 2-5' }, desc: { vi: 'Thực hành chia cơ bản', en: 'Basic division', ru: 'Деление' } },
+                        { id: 'g2_m3', title: { vi: 'Gấp & Giảm', en: 'Scaling', ru: 'Масштаб' }, desc: { vi: 'Gấp lên / giảm đi số lần', en: 'Multiply/Divide times', ru: 'Во сколько раз' } }
+                    ]
+                },
+                {
+                    id: 'g2_number',
+                    title: { vi: 'Số học & Phép tính', en: 'Numbers & Ops', ru: 'Числа' },
+                    levels: [
+                        { id: 'g2_n1', title: { vi: 'Phạm vi 1000', en: 'Range 1000', ru: 'До 1000' }, desc: { vi: 'So sánh số có 3 chữ số', en: 'Compare 3-digit numbers', ru: 'Сравнение' } },
+                        { id: 'g2_n2', title: { vi: 'Cộng trừ 1000', en: 'Add/Sub 1000', ru: 'До 1000' }, desc: { vi: 'Phạm vi 1000 (không nhớ)', en: '3-digit (no regrouping)', ru: 'Счет до 1000' } }
+                    ]
+                }
             ]
         },
         {
-            id: 'multiplication',
-            title: { en: 'Multiplication', vi: 'Phép Nhân', ru: 'Умножение' },
-            icon: '×',
-            styleRef: 'multiplication',
-            desc: { en: 'Times tables', vi: 'Bảng cửu chương & tư duy gấp', ru: 'Таблица умножения' },
-            levels: [
-                { id: 1, title: 'Level 1', desc: { vi: 'Nhân với 0 và 1', en: 'Multiply by 0 and 1', ru: 'Умножение на 0 и 1' } },
-                { id: 2, title: 'Level 2', desc: { vi: 'Nhân với 2, 5, 10', en: 'Multiply by 2, 5, 10', ru: 'Умножение на 2, 5, 10' } },
-                { id: 3, title: 'Level 3', desc: { vi: 'Bảng cửu chương 3 và 4', en: 'Table of 3 and 4', ru: 'Таблица на 3 и 4' } },
-                { id: 4, title: 'Level 4', desc: { vi: 'Bảng cửu chương 6, 7, 8, 9', en: 'Table of 6, 7, 8, 9', ru: 'Таблица на 6, 7, 8, 9' } },
-                { id: 5, title: 'Level 5', desc: { vi: 'Ôn tập ngẫu nhiên', en: 'Mixed Tables 1-9', ru: 'Смешанная таблица 1-9' } }
+            id: 'grade3',
+            title: { vi: 'Lớp 3', en: 'Grade 3', ru: '3 класс' },
+            icon: '🐥',
+            styleRef: 'grade3',
+            desc: { vi: 'Mở rộng nhân chia & số lớn', en: 'Detailed Mul/Div & Large Numbers', ru: 'Умножение и большие числа' },
+            sections: [
+                {
+                    id: 'g3_mul_div',
+                    title: { vi: 'Nhân & Chia nâng cao', en: 'Advanced Mul/Div', ru: 'Умножение и деление' },
+                    levels: [
+                        { id: 'g3_m1', title: { vi: 'Bảng nhân 6-9', en: 'Tables 6-9', ru: 'Таблицы 6-9' }, desc: { vi: 'Hoàn thiện bảng cửu chương', en: 'Finish times tables', ru: 'Таблица умножения' } },
+                        { id: 'g3_m2', title: { vi: 'Nhân với 1 chữ số', en: 'Mul by 1-digit', ru: 'Умножение на 1 цифру' }, desc: { vi: 'Số có 2, 3 chữ số', en: '2, 3-digit numbers', ru: 'Многозначные числа' } },
+                        { id: 'g3_m3', title: { vi: 'Phép chia', en: 'Division', ru: 'Деление' }, desc: { vi: 'Chia hết & Có dư', en: 'Exact & remainders', ru: 'С остатком' } }
+                    ]
+                },
+                {
+                    id: 'g3_logic',
+                    title: { vi: 'Biểu thức & Logic', en: 'Expressions', ru: 'Логика' },
+                    levels: [
+                        { id: 'g3_l1', title: { vi: 'Giá trị biểu thức', en: 'Values', ru: 'Выражения' }, desc: { vi: 'Quy tắc nhân chia trước', en: 'Order of operations', ru: 'Порядок действий' } },
+                        { id: 'g3_l2', title: { vi: 'Tìm X nâng cao', en: 'Advanced Find X', ru: 'Поиск x' }, desc: { vi: 'X nhân, X chia số lớn', en: 'Find x in mul/div', ru: 'Поиск неизвестного' } }
+                    ]
+                },
+                {
+                    id: 'g3_geo',
+                    title: { vi: 'Số học & Hình học', en: 'Math & Geo', ru: 'Геометрия' },
+                    levels: [
+                        { id: 'g3_g1', title: { vi: 'Số La Mã', en: 'Roman Numerals', ru: 'Римские цифры' }, desc: { vi: 'Làm quen I, V, X', en: 'Identify I, V, X', ru: 'I, V, X' } },
+                        { id: 'g3_g2', title: { vi: 'Số lớn 100k', en: '100k Range', ru: 'До 100к' }, desc: { vi: 'Cộng trừ có nhớ', en: 'Add/Sub with carrying', ru: 'Сложение до 100к' } },
+                        { id: 'g3_g3', title: { vi: 'Diện tích', en: 'Area', ru: 'Площадь' }, desc: { vi: 'Hình chữ nhật & vuông', en: 'Rect & Square area', ru: 'Площадь фигуры' } }
+                    ]
+                }
             ]
         },
         {
-            id: 'division',
-            title: { en: 'Division', vi: 'Phép Chia', ru: 'Деление' },
-            icon: '÷',
-            styleRef: 'division',
-            desc: { en: 'Sharing equaly', vi: 'Phép chia hết, tư duy ngược', ru: 'Деление на равные части' },
-            levels: [
-                { id: 1, title: 'Level 1', desc: { vi: 'Chia cho 1, 2, 5, 10', en: 'Divide by 1, 2, 5, 10', ru: 'Деление на 1, 2, 5, 10' } },
-                { id: 2, title: 'Level 2', desc: { vi: 'Chia cơ bản (<= 50)', en: 'Basic division (<= 50)', ru: 'Простое деление (<= 50)' } },
-                { id: 3, title: 'Level 3', desc: { vi: 'Chia nâng cao (<= 81)', en: 'Advanced division (<= 81)', ru: 'Сложное деление (<= 81)' } }
-            ]
-        },
-        {
-            id: 'logic',
-            title: { en: 'Logic', vi: 'Tư Duy Logic', ru: 'Логика' },
-            icon: '?',
-            styleRef: 'logic',
-            desc: { en: 'Brain Teasers', vi: 'Đố vui, số thiếu, so sánh', ru: 'Головоломки, сравнение' },
-            levels: [
-                { id: 1, title: 'Dạng 1', desc: { vi: 'Tìm số còn thiếu', en: 'Missing Number', ru: 'Пропущенное число' } },
-                { id: 2, title: 'Dạng 2', desc: { vi: 'So sánh ( >, <, = )', en: 'Comparison', ru: 'Сравнение (>, <, =)' } },
-                { id: 3, title: 'Dạng 3', desc: { vi: 'Chuỗi toán học', en: 'Mixed Operations', ru: 'Смешанные операции' } }
+            id: 'grade4',
+            title: { vi: 'Lớp 4', en: 'Grade 4', ru: '4 класс' },
+            icon: '🦅',
+            styleRef: 'grade4',
+            desc: { vi: 'Số rất lớn, phân số & TBC', en: 'Fractions & Large Calculations', ru: 'Дроби и вычисления' },
+            sections: [
+                {
+                    id: 'g4_fractions',
+                    title: { vi: 'Phân số', en: 'Fractions', ru: 'Дроби' },
+                    levels: [
+                        { id: 'g4_f1', title: { vi: 'Rút gọn & Quy đồng', en: 'Simplify & Common', ru: 'Упрощение' }, desc: { vi: 'Tối giản & Quy đồng mẫu', en: 'Simplifying & Common Denominator', ru: 'Знаменатель' } },
+                        { id: 'g4_f2', title: { vi: 'Cộng & Trừ', en: 'Add & Sub', ru: 'Сложение' }, desc: { vi: 'Cùng & khác mẫu số', en: 'Same/Diff denominators', ru: 'Сложение дробей' } },
+                        { id: 'g4_f3', title: { vi: 'Nhân & Chia', en: 'Mul & Div', ru: 'Умножение' }, desc: { vi: 'Toán phân số nâng cao', en: 'Fraction multiplication/div', ru: 'Умножение дробей' } }
+                    ]
+                },
+                {
+                    id: 'g4_ops',
+                    title: { vi: 'Số tự nhiên lớn', en: 'Large Natural Num', ru: 'Натуральные числа' },
+                    levels: [
+                        { id: 'g4_o1', title: { vi: 'Nhân & Chia lớn', en: 'Big Mul/Div', ru: 'Умножение' }, desc: { vi: 'Với số có 2, 3 chữ số', en: 'By 2, 3-digit numbers', ru: 'Многозначные' } },
+                        { id: 'g4_o2', title: { vi: 'Trung bình cộng', en: 'Average', ru: 'Среднее' }, desc: { vi: 'Tìm TBC của nhiều số', en: 'Find average', ru: 'Среднее значение' } },
+                        { id: 'g4_o3', title: { vi: 'Dấu hiệu chia hết', en: 'Divisibility', ru: 'Деление' }, desc: { vi: 'Chia hết cho 2, 3, 5, 9', en: 'Rules for 2, 3, 5, 9', ru: 'Признаки делимости' } }
+                    ]
+                },
+                {
+                    id: 'g4_geo',
+                    title: { vi: 'Đổi đơn vị & Hình học', en: 'Units & Geo', ru: 'Величины' },
+                    levels: [
+                        { id: 'g4_g1', title: { vi: 'Đổi đơn vị', en: 'Unit Conversion', ru: 'Единицы' }, desc: { vi: 'Tấn, tạ, thế kỷ...', en: 'Weight, Time, Length', ru: 'Конвертация' } },
+                        { id: 'g4_g2', title: { vi: 'Hình bình hành', en: 'Parallelogram', ru: 'Параллелограмм' }, desc: { vi: 'Diện tích hình bình hành', en: 'Area of Parallelogram', ru: 'Площадь' } },
+                        { id: 'g4_g3', title: { vi: 'Hình thoi', en: 'Rhombus', ru: 'Ромб' }, desc: { vi: 'Diện tích hình thoi', en: 'Area of Rhombus', ru: 'Площадь ромба' } }
+                    ]
+                }
             ]
         }
     ]
@@ -99,12 +173,34 @@ const SITE_TRANSLATIONS = {
     'result_great': { vi: 'Tuyệt vời!', en: 'Great Job!', ru: 'Отлично!' },
     'result_score': { vi: 'Bạn đạt {score} / {total} điểm', en: 'You got {score} / {total} points', ru: 'Ваш счет: {score} / {total}' },
     'btn_replay': { vi: 'Chơi lại', en: 'Replay', ru: 'Заново' },
-    'btn_menu': { vi: 'Trở về', en: 'Menu', ru: 'Меню' }
+    'btn_menu': { vi: 'Trở về', en: 'Menu', ru: 'Меню' },
+    // UI
+    'ui_score': { vi: 'Điểm', en: 'Score', ru: 'Счет' },
+    'ui_correct': { vi: 'Chính xác! 🎉', en: 'Correct! 🎉', ru: 'Верно! 🎉' },
+    'ui_wrong': { vi: 'Sai rồi, thử lại!', en: 'Wrong, try again!', ru: 'Неверно, повторите!' },
+    // Questions
+    'q_min': { vi: 'Số bé nhất trong: {val}', en: 'Smallest number in: {val}', ru: 'Наименьшее число: {val}' },
+    'q_max': { vi: 'Số lớn nhất trong: {val}', en: 'Largest number in: {val}', ru: 'Наибольшее число: {val}' },
+    'q_clock': { vi: 'Bây giờ là mấy giờ? (Kim ngắn: {a}, kim dài: 12)', en: 'What time is it? (Short hand: {a}, long hand: 12)', ru: 'Который час? (Короткая: {a}, длинная: 12)' },
+    'q_find_x': { vi: 'Tìm x?', en: 'Find x?', ru: 'Найти x?' },
+    'q_scaling_up': { vi: 'Số gấp {n} lần số {a} là bao nhiêu?', en: 'What is {n} times {a}?', ru: 'Во сколько раз {n} больше {a}?' },
+    'q_scaling_down': { vi: 'Số giảm đi {n} lần của số {a} là bao nhiêu?', en: 'What is {a} divided by {n}?', ru: 'Во сколько раз {n} меньше {a}?' },
+    'q_div_remainder': { vi: '(Chỉ lấy phần nguyên)', en: '(Quotient only)', ru: '(Только целое)' },
+    'q_roman': { vi: 'Số La Mã {val} là số mấy?', en: 'What number is Roman numeral {val}?', ru: 'Какое число обозначает {val}?' },
+    'q_area_rect': { vi: 'S hình chữ nhật cạnh {a}cm và {b}cm là bao nhiêu cm2?', en: 'Area of rectangle with sides {a}cm and {b}cm?', ru: 'Площадь прямоугольника {a}см и {b}см?' },
+    'q_area_para': { vi: 'S hình bình hành đáy {a}cm, cao {b}cm là?', en: 'Area of parallelogram base {a}cm, height {b}cm?', ru: 'Площадь параллелограмма {a}см и {b}см?' },
+    'q_area_rhom': { vi: 'S hình thoi có 2 đường chéo {a}cm và {b}cm là?', en: 'Area of rhombus with diagonals {a}cm and {b}cm?', ru: 'Площадь ромба с диагоналями {a}см и {b}см?' },
+    'q_simplify': { vi: 'Rút gọn {val} về tối giản. Kết quả ?/{b}', en: 'Simplify {val}. Result ?/{b}', ru: 'Упростите {val}. Результат ?/{b}' },
+    'q_div_check': { vi: 'Số {a} có chia hết cho {n} không? (1=Có, 0=Không)', en: 'Is {a} divisible by {n}? (1=Yes, 0=No)', ru: 'Делится ли {a} на {n}? (1=Да, 0=Нет)' },
+    'q_unit_weight': { vi: '{a} tấn = ? kg', en: '{a} tons = ? kg', ru: '{a} тонн = ? кг' },
+    'q_average': { vi: 'Trung bình cộng của {val} là?', en: 'Average of {val} is?', ru: 'Среднее арифметическое {val}?' },
+    'q_unit_cm': { vi: '{a}cm + {b}cm = ? cm', en: '{a}cm + {b}cm = ? cm', ru: '{a}см + {b}см = ? см' }
 };
 
 // GLOBAL STATE
 let state = {
     lang: localStorage.getItem('math_learner_lang') || 'en',
+    currentGrade: null,
     currentSection: null,
     currentLevel: null,
     score: 0,
@@ -178,183 +274,352 @@ const formatNumber = (num, digits = 0) => {
     return num.toString();
 }
 
+const t = (key, params = {}) => {
+    let str = (SITE_TRANSLATIONS[key] && SITE_TRANSLATIONS[key][state.lang]) || key;
+    for (const [p, val] of Object.entries(params)) {
+        str = str.replace(`{${p}}`, val);
+    }
+    return str;
+}
+
 const getRandomInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
 
 // MATH LOGIC GENERATOR
 const generateQuestion = (sectionId, levelId) => {
     let q = { text: '', ans: '', type: 'input' }; // type: 'input' or 'compare'
-    let a, b, c;
+    let a, b, c, d;
 
-    switch (sectionId) {
-        case 'addition':
-            if (levelId === 1) { // Sum <= 10
-                a = getRandomInt(0, 5);
-                b = getRandomInt(0, 10 - a);
-            } else if (levelId === 2) { // Sum <= 20, no carry (1 digit + 1/2 digit)
-                // TH1: 10 + x
-                // TH2: 1 digit + 1 digit (sum > 10 but logic says "no memory"? Usually means e.g. 12 + 3)
-                // Prompt: "So co 1 chu so cong voi so co 1 hoac 2 chu so" -> 12 + 3, 10 + 5.
-                // Keeping it simple: a in [10..15], b in [0..4]
-                if (Math.random() > 0.5) { a = 10; b = getRandomInt(0, 9); }
-                else { a = getRandomInt(11, 15); b = getRandomInt(0, 4); }
-            } else if (levelId === 3) { // Sum > 10 (carry), single digits like 8 + 5
-                a = getRandomInt(2, 9);
-                b = getRandomInt(11 - a, 9);
-                // Ensure sum > 10
-                if (a + b <= 10) b = 10 - a + getRandomInt(1, 5);
-            } else if (levelId === 4) { // Multiples of 10
-                a = getRandomInt(1, 8) * 10;
-                b = getRandomInt(1, 9 - (a / 10)) * 10;
-            } else if (levelId === 5) { // 2 digits + 2 digits (No carry)
-                a = getRandomInt(10, 80); // e.g., 23
-                let aUnit = a % 10;
-                let maxBUnit = 9 - aUnit;
-                let bUnit = getRandomInt(0, maxBUnit);
-                let aTen = Math.floor(a / 10);
-                let maxBTen = 9 - aTen;
-                let bTen = getRandomInt(1, maxBTen);
-                b = bTen * 10 + bUnit;
-            } else if (levelId === 6) { // 2 digits + 2 digits (Carry)
-                a = getRandomInt(15, 85);
-                b = getRandomInt(15, 99 - a); // Ensure sum <= 100 or just let it go over 100? prompt examples < 100 typically
+    // We mostly use levelId now since they are unique e.g. 'g1_n1'
+    switch (levelId) {
+        // --- GRADE 1 ---
+        case 'g1_n1': // Counting - missing numbers
+            a = getRandomInt(1, 15);
+            let seq = [a, a + 1, a + 2, a + 3, a + 4];
+            let missingIdx = getRandomInt(0, 4);
+            let ans = seq[missingIdx];
+            seq[missingIdx] = '...';
+            q.text = seq.join(', ');
+            q.ans = ans.toString();
+            break;
+
+        case 'g1_n2': // Comparison < 100
+            a = getRandomInt(1, 100);
+            b = getRandomInt(1, 100);
+            q.type = 'compare';
+            q.valA = a;
+            q.valB = b;
+            q.ans = a > b ? '>' : (a < b ? '<' : '=');
+            break;
+
+        case 'g1_n3': // Ordering
+            // For simplicity, let's ask for the smallest or largest of 3
+            let nums = [getRandomInt(1, 100), getRandomInt(1, 100), getRandomInt(1, 100)];
+            // ensure unique
+            nums = [...new Set(nums)];
+            if (nums.length < 3) nums.push(getRandomInt(1, 100));
+            if (Math.random() > 0.5) {
+                q.text = t('q_min', { val: nums.join(', ') });
+                q.ans = Math.min(...nums).toString();
+            } else {
+                q.text = t('q_max', { val: nums.join(', ') });
+                q.ans = Math.max(...nums).toString();
             }
+            break;
+
+        case 'g1_o1': // Add/Sub range 10
+            a = getRandomInt(1, 9);
+            if (Math.random() > 0.5) {
+                b = getRandomInt(0, 10 - a);
+                q.text = `${a} + ${b} = ?`;
+                q.ans = (a + b).toString();
+            } else {
+                b = getRandomInt(0, a);
+                q.text = `${a} - ${b} = ?`;
+                q.ans = (a - b).toString();
+            }
+            break;
+
+        case 'g1_o2': // Range 20 no regroup
+            if (Math.random() > 0.5) {
+                a = getRandomInt(10, 15);
+                b = getRandomInt(0, 4);
+                q.text = `${a} + ${b} = ?`;
+                q.ans = (a + b).toString();
+            } else {
+                a = getRandomInt(11, 19);
+                b = getRandomInt(0, a % 10);
+                q.text = `${a} - ${b} = ?`;
+                q.ans = (a - b).toString();
+            }
+            break;
+
+        case 'g1_o3': // Tens < 100
+            a = getRandomInt(1, 8) * 10;
+            if (Math.random() > 0.5) {
+                b = getRandomInt(1, 9 - (a / 10)) * 10;
+                q.text = `${a} + ${b} = ?`;
+                q.ans = (a + b).toString();
+            } else {
+                b = getRandomInt(1, a / 10) * 10;
+                q.text = `${a} - ${b} = ?`;
+                q.ans = (a - b).toString();
+            }
+            break;
+
+        case 'g1_o4': // Range 100 no regroup
+            a = getRandomInt(21, 80);
+            if (Math.random() > 0.5) {
+                b = getRandomInt(1, 9 - (a % 10)); // unit
+                c = getRandomInt(1, 9 - Math.floor(a / 10)) * 10; // tens
+                b = b + c;
+                q.text = `${a} + ${b} = ?`;
+                q.ans = (a + b).toString();
+            } else {
+                b = getRandomInt(0, a % 10);
+                c = getRandomInt(1, Math.floor(a / 10) - 1) * 10;
+                b = b + c;
+                q.text = `${a} - ${b} = ?`;
+                q.ans = (a - b).toString();
+            }
+            break;
+
+        case 'g1_g1': // Clock
+            a = getRandomInt(1, 12);
+            q.text = t('q_clock', { a: a });
+            q.ans = a.toString();
+            break;
+
+        case 'g1_g2': // Length cm
+            a = getRandomInt(1, 10);
+            b = getRandomInt(1, 10);
+            q.text = t('q_unit_cm', { a: a, b: b });
+            q.ans = (a + b).toString();
+            break;
+
+        // --- GRADE 2 ---
+        case 'g2_o1': // Addition with carrying
+            a = getRandomInt(15, 85);
+            b = getRandomInt(15, 99 - a);
+            // Ensure carrying? 
+            if ((a % 10) + (b % 10) < 10) b += (10 - (a % 10));
             q.text = `${a} + ${b} = ?`;
             q.ans = (a + b).toString();
             break;
 
-        case 'subtraction':
-            if (levelId === 1) { // <= 10
-                a = getRandomInt(1, 10);
-                b = getRandomInt(0, a);
-            } else if (levelId === 2) { // <= 20 no carry e.g. 15-3
-                a = getRandomInt(11, 19);
-                b = getRandomInt(0, a % 10);
-            } else if (levelId === 3) { // 13-5 (carry/borrow)
-                a = getRandomInt(11, 18);
-                // b must be > last digit of a
-                let minB = (a % 10) + 1;
-                b = getRandomInt(minB, 9);
-            } else if (levelId === 4) { // Round 10
-                a = getRandomInt(2, 9) * 10;
-                b = getRandomInt(1, (a / 10) - 1) * 10;
-            } else if (levelId === 5) { // 2 digits, no borrow
-                a = getRandomInt(20, 99);
-                let aUnit = a % 10;
-                let bUnit = getRandomInt(0, aUnit);
-                let aTen = Math.floor(a / 10);
-                let bTen = getRandomInt(1, aTen - 1);
-                b = bTen * 10 + bUnit;
-            } else if (levelId === 6) { // 2 digits, borrow
-                a = getRandomInt(20, 90);
-                let aUnit = a % 10;
-                // b unit must be > aUnit
-                let bUnit = getRandomInt(aUnit + 1, 9);
-                let aTen = Math.floor(a / 10);
-                let bTen = getRandomInt(1, aTen - 1);
-                b = bTen * 10 + bUnit;
-            }
+        case 'g2_o2': // Subtraction with borrowing
+            a = getRandomInt(31, 99);
+            b = getRandomInt(11, a - 5);
+            // Ensure borrowing
+            if ((a % 10) >= (b % 10)) b = (Math.floor(b / 10) * 10) + (a % 10) + 1;
+            if (b >= a) b = a - 1;
             q.text = `${a} - ${b} = ?`;
             q.ans = (a - b).toString();
             break;
 
-        case 'multiplication':
-            if (levelId === 1) { // x0, x1
-                b = Math.random() > 0.5 ? 0 : 1;
-                a = getRandomInt(1, 10);
-            } else if (levelId === 2) { // x2, x5, x10
-                let set = [2, 5, 10];
-                b = set[getRandomInt(0, 2)];
-                a = getRandomInt(1, 10);
-            } else if (levelId === 3) { // x3, x4
-                b = Math.random() > 0.5 ? 3 : 4;
-                a = getRandomInt(1, 10);
-            } else if (levelId === 4) { // x6,7,8,9
-                b = getRandomInt(6, 9);
-                a = getRandomInt(1, 10);
-            } else if (levelId === 5) { // Random 1-9
-                a = getRandomInt(1, 9);
-                b = getRandomInt(1, 9);
+        case 'g2_o3': // Find x
+            a = getRandomInt(5, 30);
+            b = getRandomInt(5, 30);
+            c = a + b;
+            if (Math.random() > 0.5) {
+                q.text = `x + ${a} = ${c}. ` + t('q_find_x');
+                q.ans = b.toString();
+            } else {
+                q.text = `${c} - x = ${a}. ` + t('q_find_x');
+                q.ans = b.toString();
             }
+            break;
+
+        case 'g2_m1': // Mul 2-5
+            a = getRandomInt(2, 5);
+            b = getRandomInt(1, 10);
             q.text = `${a} × ${b} = ?`;
             q.ans = (a * b).toString();
             break;
 
-        case 'division':
-            if (levelId === 1) { // /1, /2, /5, /10
-                let set = [1, 2, 5, 10];
-                b = set[getRandomInt(0, 3)];
-                c = getRandomInt(1, 10); // Quotient
-                a = b * c; // Dividend
-            } else if (levelId === 2) { // Dividend <= 50
-                // Use multiplication to find valid pairs
-                b = getRandomInt(2, 9);
-                c = getRandomInt(2, Math.floor(50 / b));
-                a = b * c;
-            } else if (levelId === 3) { // Dividend <= 81
-                b = getRandomInt(2, 9);
-                c = getRandomInt(2, 9);
-                a = b * c;
-            }
+        case 'g2_m2': // Div 2-5
+            b = getRandomInt(2, 5);
+            c = getRandomInt(1, 10);
+            a = b * c;
             q.text = `${a} : ${b} = ?`;
-            q.ans = c !== undefined ? c.toString() : (a / b).toString();
+            q.ans = c.toString();
             break;
 
-        case 'logic':
-            if (levelId === 1) { // Missing Number
-                // ? + 5 = 12 or 4 x ? = 20
-                let op = getRandomInt(0, 1) === 0 ? '+' : 'x';
-                if (op === '+') {
-                    a = getRandomInt(1, 20);
-                    b = getRandomInt(1, 20);
-                    let sum = a + b;
-                    // Hide a or b
-                    if (Math.random() > 0.5) {
-                        q.text = `? + ${b} = ${sum}`;
-                        q.ans = a.toString();
-                    } else {
-                        q.text = `${a} + ? = ${sum}`;
-                        q.ans = b.toString();
-                    }
-                } else {
-                    a = getRandomInt(2, 9);
-                    b = getRandomInt(2, 9);
-                    let prod = a * b;
-                    if (Math.random() > 0.5) {
-                        q.text = `? × ${b} = ${prod}`;
-                        q.ans = a.toString();
-                    } else {
-                        q.text = `${a} × ? = ${prod}`;
-                        q.ans = b.toString();
-                    }
-                }
-            } else if (levelId === 2) { // Comparison
-                a = getRandomInt(1, 20);
-                b = getRandomInt(1, 20);
-                // Maybe simplified expressions like 5+2 ... 8
-                let valA = a;
-                let sideA = a.toString();
-                if (Math.random() > 0.5) {
-                    let x = getRandomInt(1, 10);
-                    let y = getRandomInt(1, 10);
-                    valA = x + y;
-                    sideA = `${x} + ${y}`;
-                }
-
-                q.text = `${sideA} ... ${b}`;
-                q.type = 'compare';
-                if (valA > b) q.ans = '>';
-                else if (valA < b) q.ans = '<';
-                else q.ans = '=';
-                q.valA = sideA;
-                q.valB = b;
-            } else if (levelId === 3) { // Mixed operations e.g. 2 + 3 - 1
-                a = getRandomInt(1, 10);
-                b = getRandomInt(1, 10);
-                c = getRandomInt(1, a + b); // Avoid negative too much
-                q.text = `${a} + ${b} - ${c} = ?`;
-                q.ans = (a + b - c).toString();
+        case 'g2_m3': // Scaling
+            a = getRandomInt(2, 10);
+            if (Math.random() > 0.5) {
+                q.text = t('q_scaling_up', { a: a, n: 3 });
+                q.ans = (a * 3).toString();
+            } else {
+                q.text = t('q_scaling_down', { a: a * 2, n: 2 });
+                q.ans = a.toString();
             }
             break;
+
+        case 'g2_n1': // Range 1000 compare
+            a = getRandomInt(100, 999);
+            b = getRandomInt(100, 999);
+            q.type = 'compare';
+            q.valA = a;
+            q.valB = b;
+            q.ans = a > b ? '>' : (a < b ? '<' : '=');
+            break;
+
+        case 'g2_n2': // Add/Sub 1000 no regroup
+            a = getRandomInt(200, 700);
+            b = getRandomInt(100, 200);
+            if (Math.random() > 0.5) {
+                q.text = `${a} + ${b} = ?`;
+                q.ans = (a + b).toString();
+            } else {
+                q.text = `${a} - ${b} = ?`;
+                q.ans = (a - b).toString();
+            }
+            break;
+
+        // --- GRADE 3 ---
+        case 'g3_m1': // Mul 6-9
+            a = getRandomInt(6, 9);
+            b = getRandomInt(1, 10);
+            q.text = `${a} × ${b} = ?`;
+            q.ans = (a * b).toString();
+            break;
+
+        case 'g3_m2': // 2/3-digit x 1-digit
+            a = getRandomInt(11, 200);
+            b = getRandomInt(2, 5);
+            q.text = `${a} × ${b} = ?`;
+            q.ans = (a * b).toString();
+            break;
+
+        case 'g3_m3': // Div with remainder
+            b = getRandomInt(2, 9);
+            c = getRandomInt(2, 10); // Quotient
+            d = getRandomInt(1, b - 1); // Remainder
+            a = b * c + d;
+            q.text = `${a} : ${b} = ? ` + t('q_div_remainder');
+            q.ans = c.toString();
+            break;
+
+        case 'g3_l1': // Order of ops
+            a = getRandomInt(10, 30);
+            b = getRandomInt(2, 5);
+            c = getRandomInt(2, 5);
+            // 20 + 5 * 2
+            q.text = `${a} + ${b} × ${c} = ?`;
+            q.ans = (a + b * c).toString();
+            break;
+
+        case 'g3_l2': // Advanced Find X
+            a = getRandomInt(2, 5);
+            b = getRandomInt(20, 50);
+            c = a * b;
+            q.text = `x × ${a} = ${c}. ` + t('q_find_x');
+            q.ans = b.toString();
+            break;
+
+        case 'g3_g1': // Roman
+            let romans = { 'I': 1, 'II': 2, 'III': 3, 'IV': 4, 'V': 5, 'VI': 6, 'VII': 7, 'VIII': 8, 'IX': 9, 'X': 10 };
+            let keys = Object.keys(romans);
+            let rIdx = getRandomInt(0, 9);
+            q.text = t('q_roman', { val: keys[rIdx] });
+            q.ans = romans[keys[rIdx]].toString();
+            break;
+
+        case 'g3_g2': // 100k Range Add/Sub
+            a = getRandomInt(10000, 50000);
+            b = getRandomInt(10000, 40000);
+            if (Math.random() > 0.5) {
+                q.text = `${a} + ${b} = ?`;
+                q.ans = (a + b).toString();
+            } else {
+                q.text = `${a + b} - ${a} = ?`;
+                q.ans = b.toString();
+            }
+            break;
+
+        case 'g3_g3': // Area
+            a = getRandomInt(3, 10);
+            b = getRandomInt(3, 10);
+            q.text = t('q_area_rect', { a: a, b: b });
+            q.ans = (a * b).toString();
+            break;
+
+        // --- GRADE 4 ---
+        case 'g4_f1': // Simplify fraction
+            c = getRandomInt(2, 5);
+            a = getRandomInt(1, 3);
+            b = getRandomInt(4, 6);
+            // Example: 2/4 -> 1/2
+            q.text = t('q_simplify', { val: `${a * c}/${b * c}`, b: b });
+            q.ans = a.toString();
+            break;
+
+        case 'g4_f2': // Add/Sub same denominator
+            a = getRandomInt(1, 5);
+            b = getRandomInt(1, 5);
+            c = 12;
+            q.text = `${a}/${c} + ${b}/${c} = ?/${c}`;
+            q.ans = (a + b).toString();
+            break;
+
+        case 'g4_f3': // Mul fraction
+            a = getRandomInt(1, 4);
+            b = getRandomInt(5, 9);
+            q.text = `${a}/2 × ${b}/3 = ?/6`;
+            q.ans = (a * b).toString();
+            break;
+
+        case 'g4_o1': // Big Mul/Div
+            a = getRandomInt(100, 150);
+            b = getRandomInt(11, 13);
+            q.text = `${a} × ${b} = ?`;
+            q.ans = (a * b).toString();
+            break;
+
+        case 'g4_o2': // Average
+            a = getRandomInt(10, 20);
+            b = getRandomInt(20, 30);
+            c = getRandomInt(30, 40);
+            let sum = a + b + c;
+            // ensure divisible by 3 by adjusting c
+            let rem = sum % 3;
+            if (rem !== 0) c += (3 - rem);
+            q.text = t('q_average', { val: `${a}, ${b}, ${c}` });
+            q.ans = ((a + b + c) / 3).toString();
+            break;
+
+        case 'g4_o3': // Divisibility
+            a = [120, 123, 124, 125, 129][getRandomInt(0, 4)];
+            q.text = t('q_div_check', { a: a, n: 3 });
+            // if a=120, 1+2+0=3 (yes), if a=123, 1+2+3=6 (yes), if a=129, 1+2+9=12 (yes)
+            q.ans = (a % 3 === 0) ? "1" : "0";
+            break;
+
+        case 'g4_g1': // Unit conversion
+            a = getRandomInt(2, 10);
+            q.text = t('q_unit_weight', { a: a });
+            q.ans = (a * 1000).toString();
+            break;
+
+        case 'g4_g2': // Parallelogram area
+            a = getRandomInt(5, 15); // base
+            b = getRandomInt(4, 10); // height
+            q.text = t('q_area_para', { a: a, b: b });
+            q.ans = (a * b).toString();
+            break;
+
+        case 'g4_g3': // Rhombus area
+            a = getRandomInt(4, 12); // diagonal 1
+            b = getRandomInt(4, 10); // diagonal 2
+            // ensure a*b is even
+            if ((a * b) % 2 !== 0) a++; // make it even
+            q.text = t('q_area_rhom', { a: a, b: b });
+            q.ans = ((a * b) / 2).toString();
+            break;
+
+        default:
+            q.text = "1 + 1 = ?";
+            q.ans = "2";
     }
 
     // Fallback if something fails
@@ -374,6 +639,7 @@ const renderHeader = (showBack = false) => {
 }
 
 const renderHome = () => {
+    state.currentGrade = null;
     state.currentSection = null;
     state.currentLevel = null;
     renderHeader(false); // Hide back button
@@ -382,16 +648,44 @@ const renderHome = () => {
     main.innerHTML = `<div class="menu-grid"></div>`;
     const grid = main.querySelector('.menu-grid');
 
-    APP_DATA.sections.forEach(sec => {
+    APP_DATA.grades.forEach(grade => {
         const card = document.createElement('div');
-        card.className = `menu-card ${sec.styleRef}`;
+        card.className = `menu-card ${grade.styleRef}`;
+        card.onclick = () => renderSectionsByGrade(grade);
+
+        card.innerHTML = `
+            <div class="card-icon">${grade.icon}</div>
+            <div class="card-info">
+                <h3>${grade.title[state.lang]}</h3>
+                <p>${grade.desc[state.lang]}</p>
+            </div>
+            <div><i class="fas fa-chevron-right" style="color: #ccc"></i></div>
+        `;
+        grid.appendChild(card);
+    });
+}
+
+const renderSectionsByGrade = (grade) => {
+    state.currentGrade = grade;
+    state.currentSection = null;
+    renderHeader(true);
+
+    const main = document.getElementById('main-content');
+    main.innerHTML = `
+        <h2 style="margin-top:0">${grade.title[state.lang]}</h2>
+        <div class="menu-grid"></div>
+    `;
+    const grid = main.querySelector('.menu-grid');
+
+    grade.sections.forEach(sec => {
+        const card = document.createElement('div');
+        card.className = `menu-card`;
+        card.style.padding = '15px';
         card.onclick = () => renderLevels(sec);
 
         card.innerHTML = `
-            <div class="card-icon">${sec.icon}</div>
             <div class="card-info">
-                <h3>${sec.title[state.lang]}</h3>
-                <p>${sec.desc[state.lang]}</p>
+                <h3 style="margin-bottom:0">${sec.title[state.lang]}</h3>
             </div>
             <div><i class="fas fa-chevron-right" style="color: #ccc"></i></div>
         `;
@@ -415,7 +709,7 @@ const renderLevels = (section) => {
         btn.className = 'level-btn';
         btn.onclick = () => startGame(section, lvl);
         btn.innerHTML = `
-            <span class="level-number">Level ${lvl.id}</span>
+            <span class="level-number">${lvl.title[state.lang]}</span>
             <span class="level-desc">${lvl.desc[state.lang]}</span>
         `;
         grid.appendChild(btn);
@@ -439,8 +733,8 @@ const renderGameScreen = () => {
     main.innerHTML = `
         <div class="game-area">
             <div class="game-header">
-                <span>Level ${state.currentLevel.id}</span>
-                <span>Score: <span id="score-display">0</span></span>
+                <span>${state.currentLevel.title[state.lang]}</span>
+                <span>${t('ui_score')}: <span id="score-display">0</span></span>
             </div>
             
             <div class="game-body">
@@ -458,14 +752,16 @@ const renderGameScreen = () => {
 
 const renderKeypad = () => {
     const container = document.getElementById('keypad-container');
+    if (!container) return;
 
-    // Check if comparison or number pad
-    // Actually we don't know the question type yet upon render frame, 
-    // but the section/level usually determines it. 
-    // Exception: Logic level 2 is comparison, Logic 1/3 is number.
-    // Let's decide based on current question type in `nextQuestion` or checking level now.
-
-    let isComparison = (state.currentSection.id === 'logic' && state.currentLevel.id === 2);
+    // Determine type: check current question first, then fallback to level heuristics
+    let isComparison = false;
+    if (state.currQuestion) {
+        isComparison = (state.currQuestion.type === 'compare');
+    } else {
+        // Heuristic for the very first render before nextQuestion() is called
+        isComparison = ['g1_n2', 'g2_n1'].includes(state.currentLevel.id);
+    }
 
     if (isComparison) {
         container.innerHTML = `
@@ -584,8 +880,7 @@ const handleCheck = () => {
         document.getElementById('score-display').innerText = state.score;
 
         // Show success message
-        const msg = { 'vi': 'Chính xác! 🎉', 'en': 'Correct! 🎉', 'ru': 'Верно! 🎉' }[state.lang];
-        showToast(msg, 'success');
+        showToast(t('ui_correct'), 'success');
 
         // Move to next question
         setTimeout(() => {
@@ -598,8 +893,7 @@ const handleCheck = () => {
         disp.classList.add('shake');
 
         // Show error message
-        const errMsg = { 'vi': 'Sai rồi, thử lại!', 'en': 'Wrong, try again!', 'ru': 'Неверно, повторите!' }[state.lang];
-        showToast(errMsg, 'error');
+        showToast(t('ui_wrong'), 'error');
 
         setTimeout(() => disp.classList.remove('shake'), 500);
     }
@@ -633,14 +927,11 @@ window.changeLang = (lang) => {
     // If we're in a game or section, we might need to re-render to update dynamic content
     if (state.currentLevel) {
         renderGameScreen();
-        // and current question text needs update if it was generated
-        if (state.currQuestion) {
-            // Regeneration might change the question, maybe just update text if possible?
-            // For now, let's keep it simple and re-render the current screen
-            nextQuestion();
-        }
+        nextQuestion();
     } else if (state.currentSection) {
         renderLevels(state.currentSection);
+    } else if (state.currentGrade) {
+        renderSectionsByGrade(state.currentGrade);
     } else {
         renderHome();
     }
@@ -736,7 +1027,11 @@ if (backBtn) {
             renderLevels(state.currentSection);
             state.currentLevel = null;
         } else if (state.currentSection) {
-            // If in Level Select, go to Home
+            // If in Level Select, go to Grade Sections
+            renderSectionsByGrade(state.currentGrade);
+            state.currentSection = null;
+        } else if (state.currentGrade) {
+            // If in Grade Sections, go to Home
             renderHome();
         }
     });
