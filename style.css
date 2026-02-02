@@ -1,0 +1,236 @@
+:root {
+    --primary-color: #6C5CE7;
+    --accent-color: #00B894;
+    --bg-color: #dfe6e9;
+    --card-bg: #ffffff;
+}
+
+body {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    background-color: var(--bg-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.app-container {
+    width: 100%;
+    max-width: 400px;
+    /* Kích thước giống màn hình điện thoại */
+    height: 90vh;
+    background: var(--card-bg);
+    border-radius: 30px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+/* Modal System */
+.modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    /* Hidden by default */
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    backdrop-filter: blur(5px);
+    border-radius: 30px;
+}
+
+.modal-content {
+    background: white;
+    padding: 30px;
+    border-radius: 25px;
+    text-align: center;
+    width: 80%;
+    animation: popIn 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes popIn {
+    0% {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.modal-icon {
+    font-size: 4rem;
+    margin-bottom: 10px;
+}
+
+.modal-content h2 {
+    color: var(--primary-color);
+    margin: 10px 0;
+    font-weight: 800;
+}
+
+.modal-content p {
+    color: #636e72;
+    margin-bottom: 20px;
+}
+
+.game-header {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.language-selector select {
+    width: 100%;
+    padding: 8px;
+    border-radius: 10px;
+    border: 2px solid #dfe6e9;
+    font-family: inherit;
+    color: var(--primary-color);
+    background: white;
+    cursor: pointer;
+}
+
+.score-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.progress-bar {
+    width: 60%;
+    height: 15px;
+    background-color: #f1f2f6;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-bar .fill {
+    height: 100%;
+    background-color: var(--accent-color);
+    border-radius: 10px;
+}
+
+.score {
+    font-size: 1.2rem;
+    color: #fdcb6e;
+}
+
+/* Phần hiển thị phép tính */
+.question-card {
+    font-size: 4rem;
+    font-weight: 800;
+    color: var(--primary-color);
+    text-align: center;
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+/* Canvas đè lên trên để viết */
+#drawing-board {
+    background: rgba(240, 240, 240, 0.5);
+    /* Nền mờ để thấy vị trí viết */
+    border: 2px dashed #b2bec3;
+    border-radius: 20px;
+    width: 100%;
+    height: 150px;
+    /* Cố định chiều cao thay vì flex-grow */
+    cursor: crosshair;
+    touch-action: none;
+    /* Quan trọng cho mobile */
+}
+
+.number-pad {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.n-btn {
+    background: #f1f2f6;
+    border: none;
+    padding: 15px;
+    border-radius: 15px;
+    font-size: 1.5rem;
+    font-weight: 800;
+    font-family: inherit;
+    color: var(--primary-color);
+    box-shadow: 0 4px 0 #dfe6e9;
+    cursor: pointer;
+}
+
+.n-btn:active {
+    transform: translateY(2px);
+    box-shadow: none;
+}
+
+/* Nút Xóa */
+.btn-clear {
+    background-color: #ff7675;
+    /* Màu đỏ hồng cảnh báo */
+    color: white !important;
+    box-shadow: 0 4px 0 #d63031;
+    font-size: 1.2rem;
+}
+
+/* Nút OK */
+.btn-ok {
+    background-color: var(--accent-color);
+    color: white !important;
+    box-shadow: 0 4px 0 #009174;
+}
+
+.game-controls {
+    margin-top: 10px;
+    display: flex;
+    gap: 10px;
+}
+
+/* Nút bấm đẹp */
+.btn {
+    border: none;
+    padding: 15px 30px;
+    border-radius: 50px;
+    font-size: 1.2rem;
+    font-weight: 800;
+    font-family: inherit;
+    cursor: pointer;
+    transition: transform 0.1s;
+}
+
+.btn-secondary {
+    background-color: #fab1a0;
+    color: white;
+    flex: 1;
+}
+
+.btn-primary {
+    background-color: var(--accent-color);
+    color: white;
+    flex: 2;
+    box-shadow: 0 5px 0 #009174;
+    /* Hiệu ứng nút nổi 3D */
+}
+
+.btn-primary:active {
+    transform: translateY(5px);
+    box-shadow: none;
+}
