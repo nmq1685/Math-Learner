@@ -8,7 +8,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Nunito:wght@400;700&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
@@ -22,8 +22,8 @@
             <nav class="site-nav">
                 <ul>
                     <li><a href="index.html" class="active" data-i18n="nav_home">Trang Chủ</a></li>
-                    <li><a href="play.html" data-i18n="nav_play">Chơi Ngay</a></li>
-                    <li><a href="about.html" data-i18n="nav_about">Giới Thiệu</a></li>
+                    <li><a href="pages/play.html" data-i18n="nav_play">Chơi Ngay</a></li>
+                    <li><a href="pages/about.html" data-i18n="nav_about">Giới Thiệu</a></li>
                     <li class="lang-switcher">
                         <select onchange="changeLang(this.value)" id="lang-select">
                             <option value="vi">🇻🇳 VI</option>
@@ -47,7 +47,7 @@
                     <h1 data-i18n="hero_title">Học Toán Thật Vui!</h1>
                     <p data-i18n="hero_desc">Nền tảng học tập tương tác giúp trẻ làm quen với những con số một cách tự
                         nhiên nhất.</p>
-                    <a href="play.html" class="btn-hero" data-i18n="hero_btn">Bắt Đầu Ngay</a>
+                    <a href="pages/play.html" class="btn-hero" data-i18n="hero_btn">Bắt Đầu Ngay</a>
                 </div>
                 <div class="hero-image">
                     <i class="fas fa-calculator"></i>
@@ -87,7 +87,7 @@
                 <h2 style="font-size: 3rem; margin-bottom: 20px;" data-i18n="hero_title">Sẵn sàng để thử thách?</h2>
                 <p style="font-size: 1.3rem; margin-bottom: 40px; opacity: 0.9;" data-i18n="hero_desc">Hãy để bé bắt đầu
                     hành trình chinh phục toán học ngay hôm nay!</p>
-                <a href="play.html" class="btn-hero" style="background: white; color: var(--secondary-color);"
+                <a href="pages/play.html" class="btn-hero" style="background: white; color: var(--secondary-color);"
                     data-i18n="hero_btn">Chơi Ngay Bây Giờ</a>
             </div>
         </section>
@@ -105,10 +105,10 @@
                     <h4 data-i18n="footer_links">Liên Kết</h4>
                     <ul>
                         <li><a href="index.html" data-i18n="nav_home">Trang Chủ</a></li>
-                        <li><a href="play.html" data-i18n="nav_play">Chơi Ngay</a></li>
-                        <li><a href="about.html" data-i18n="nav_about">Giới Thiệu</a></li>
-                        <li><a href="privacy.html" data-i18n="footer_privacy">Chính Sách Bảo Mật</a></li>
-                        <li><a href="terms.html" data-i18n="footer_terms">Điều Khoản Sử Dụng</a></li>
+                        <li><a href="pages/play.html" data-i18n="nav_play">Chơi Ngay</a></li>
+                        <li><a href="pages/about.html" data-i18n="nav_about">Giới Thiệu</a></li>
+                        <li><a href="pages/privacy.html" data-i18n="footer_privacy">Chính Sách Bảo Mật</a></li>
+                        <li><a href="pages/terms.html" data-i18n="footer_terms">Điều Khoản Sử Dụng</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
@@ -139,7 +139,7 @@
     <!-- Toast Container -->
     <div id="toast-container" class="toast-container"></div>
 
-    <script src="script.js"></script>
+    <script src="assets/js/script.js"></script>
 </body>
 
 </html>

@@ -1,0 +1,13 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# VS Code settings
+.vscode/
+
+# Node modules (if added in future)
+node_modules/
+
+# Local data or logs
+*.log
+data/local_*

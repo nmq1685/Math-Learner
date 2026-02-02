@@ -4,16 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Điều Khoản Sử Dụng - Math Learner</title>
+    <title>Chơi Ngay - Math Learner</title>
     <link
         href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Nunito:wght@400;700&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
-<body class="website-mode">
-
+<body>
     <!-- Website Header -->
     <header class="site-header">
         <div class="container">
@@ -22,8 +21,8 @@
             </div>
             <nav class="site-nav">
                 <ul>
-                    <li><a href="index.html" data-i18n="nav_home">Trang Chủ</a></li>
-                    <li><a href="play.html" data-i18n="nav_play">Chơi Ngay</a></li>
+                    <li><a href="../index.html" data-i18n="nav_home">Trang Chủ</a></li>
+                    <li><a href="play.html" class="active" data-i18n="nav_play">Chơi Ngay</a></li>
                     <li><a href="about.html" data-i18n="nav_about">Giới Thiệu</a></li>
                     <li class="lang-switcher">
                         <select onchange="changeLang(this.value)" id="lang-select">
@@ -41,32 +40,21 @@
     </header>
 
     <main class="site-main">
-        <section class="about-hero" style="background: linear-gradient(135deg, #00b894, #00cec9);">
-            <div class="container">
-                <h1 data-i18n="terms_title">Điều Khoản Sử Dụng</h1>
-                <p data-i18n="terms_hero_p">Quy định khi sử dụng nền tảng học tập Math Learner.</p>
+        <div class="play-page-wrapper">
+            <div class="app-container">
+                <!-- App Header (Game Controls) -->
+                <header class="app-header">
+                    <button id="btn-back" class="icon-btn hidden"><i class="fas fa-arrow-left"></i></button>
+                    <div class="logo">Math Learner</div>
+                    <button id="btn-settings" class="icon-btn"><i class="fas fa-cog"></i></button>
+                </header>
+
+                <!-- Main Content Area -->
+                <main id="main-content">
+                    <!-- Screens will be injected here by JavaScript -->
+                </main>
             </div>
-        </section>
-
-        <section class="container" style="padding: 40px 20px; line-height: 1.8; color: var(--text-color);">
-            <div class="about-card" style="text-align: left; max-width: 900px; margin: 0 auto; padding: 40px;">
-                <h2 data-i18n="terms_section1_title">1. Chấp nhận điều khoản</h2>
-                <p data-i18n="terms_section1_desc">Bằng cách truy cập và sử dụng Math Learner, bạn đồng ý tuân thủ các
-                    điều khoản này. Ứng dụng được cung cấp miễn phí cho mục đích giáo dục.</p>
-
-                <h2 data-i18n="terms_section2_title">2. Quyền sở hữu trí tuệ</h2>
-                <p data-i18n="terms_section2_desc">Toàn bộ mã nguồn, thiết kế và nội dung thuộc về dự án cá nhân của
-                    Nguyễn Minh Quân. Bạn không được phép sao chép hoặc thương mại hóa dự án khi chưa có sự đồng ý.</p>
-
-                <h2 data-i18n="terms_section3_title">3. Giới hạn trách nhiệm</h2>
-                <p data-i18n="terms_section3_desc">Chúng tôi nỗ lực cung cấp nội dung chính xác nhưng không chịu trách
-                    nhiệm về bất kỳ sai sót kỹ thuật hoặc vấn đề phát sinh trong quá trình sử dụng.</p>
-
-                <h2 data-i18n="terms_section4_title">4. Thay đổi nội dung</h2>
-                <p data-i18n="terms_section4_desc">Chúng tôi có quyền cập nhật, thay đổi hoặc ngừng cung cấp một phần
-                    của ứng dụng bất kỳ lúc nào để cải thiện trải nghiệm người dùng.</p>
-            </div>
-        </section>
+        </div>
     </main>
 
     <!-- Website Footer -->
@@ -80,11 +68,11 @@
                 <div class="footer-col">
                     <h4 data-i18n="footer_links">Liên Kết</h4>
                     <ul>
-                        <li><a href="index.html" data-i18n="nav_home">Trang Chủ</a></li>
+                        <li><a href="../index.html" data-i18n="nav_home">Trang Chủ</a></li>
                         <li><a href="play.html" data-i18n="nav_play">Chơi Ngay</a></li>
                         <li><a href="about.html" data-i18n="nav_about">Giới Thiệu</a></li>
                         <li><a href="privacy.html" data-i18n="footer_privacy">Chính Sách Bảo Mật</a></li>
-                        <li><a href="terms.html" data-i18n="footer_terms">Điều Khoản</a></li>
+                        <li><a href="terms.html" data-i18n="footer_terms">Điều Khoản Sử Dụng</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
@@ -101,7 +89,21 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <!-- Modals -->
+    <div id="modal-overlay" class="modal-overlay hidden">
+        <div class="modal-content">
+            <h2 id="modal-title">Title</h2>
+            <p id="modal-message">Message</p>
+            <div class="modal-actions">
+                <!-- Buttons injected dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <script src="../assets/js/script.js"></script>
 </body>
 
 </html>
