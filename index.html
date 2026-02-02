@@ -4,73 +4,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Math Learner Web</title>
+    <title>Math Learner - Bé Vui Học Toán</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Nunito:wght@400;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body>
-
     <div class="app-container">
-        <!-- Modal thông báo -->
-        <div id="game-modal" class="modal-overlay">
-            <div class="modal-content">
-                <div id="modal-icon" class="modal-icon">⭐</div>
-                <h2 id="modal-title">Chính xác!</h2>
-                <p id="modal-message">Bé giỏi quá!</p>
-                <button class="btn btn-primary" onclick="closeModal()">Tiếp tục</button>
-            </div>
-        </div>
-
-        <header class="game-header">
-            <div class="language-selector">
-                <select id="lang-select" onchange="changeLanguage()">
-                    <option value="en">English 🇺🇸</option>
-                    <option value="vi">Tiếng Việt 🇻🇳</option>
-                    <option value="ru">Русский 🇷🇺</option>
-                </select>
-            </div>
-            <div class="score-container">
-                <div class="progress-bar">
-                    <div class="fill" style="width: 0%;"></div>
-                </div>
-                <div class="score" id="score-label">⭐ 0</div>
-            </div>
+        <!-- Header / Navigation -->
+        <header class="app-header">
+            <button id="btn-back" class="icon-btn hidden"><i class="fas fa-arrow-left"></i></button>
+            <div class="logo">Math Learner</div>
+            <button id="btn-settings" class="icon-btn"><i class="fas fa-cog"></i></button>
         </header>
 
-        <main class="game-board">
-            <div class="question-card">
-                <span class="number" id="num1">5</span>
-                <span class="operator" id="operator">+</span>
-                <span class="number" id="num2">3</span>
-                <span class="equals">=</span>
-                <span class="answer-box" id="user-answer">?</span>
-            </div>
-
-            <canvas id="drawing-board"></canvas>
-
-            <div class="number-pad">
-                <button class="n-btn" onclick="inputNumber(1)">1</button>
-                <button class="n-btn" onclick="inputNumber(2)">2</button>
-                <button class="n-btn" onclick="inputNumber(3)">3</button>
-                <button class="n-btn" onclick="inputNumber(4)">4</button>
-                <button class="n-btn" onclick="inputNumber(5)">5</button>
-                <button class="n-btn" onclick="inputNumber(6)">6</button>
-                <button class="n-btn" onclick="inputNumber(7)">7</button>
-                <button class="n-btn" onclick="inputNumber(8)">8</button>
-                <button class="n-btn" onclick="inputNumber(9)">9</button>
-                <button class="n-btn btn-clear" id="btn-clear-text" onclick="clearAnswer()">Clear</button>
-                <button class="n-btn" onclick="inputNumber(0)">0</button>
-                <button class="n-btn btn-ok" id="btn-ok-text" onclick="checkAnswer()">OK</button>
-            </div>
+        <!-- Main Content Area -->
+        <main id="main-content">
+            <!-- Screens will be injected here by JavaScript -->
         </main>
 
-        <footer class="game-controls">
-            <button class="btn btn-secondary" id="btn-hint-text" onclick="showHint()">Hint</button>
-            <button class="btn btn-primary" id="btn-check-text" onclick="checkAnswer()">Check</button>
-        </footer>
+        <!-- Sound Effects Removed (Using Web Audio API) -->
     </div>
+
+    <!-- Modals -->
+    <div id="modal-overlay" class="modal-overlay hidden">
+        <div class="modal-content">
+            <h2 id="modal-title">Title</h2>
+            <p id="modal-message">Message</p>
+            <div class="modal-actions">
+                <!-- Buttons injected dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toast-container" class="toast-container"></div>
 
     <script src="script.js"></script>
 </body>
