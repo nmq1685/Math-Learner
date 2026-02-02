@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Math Learner - Bé Vui Học Toán</title>
+    <title>Chơi Ngay - Math Learner</title>
     <link
         href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Nunito:wght@400;700&display=swap"
         rel="stylesheet">
@@ -21,8 +21,8 @@
             </div>
             <nav class="site-nav">
                 <ul>
-                    <li><a href="index.html" class="active" data-i18n="nav_home">Trang Chủ</a></li>
-                    <li><a href="play.html" data-i18n="nav_play">Chơi Ngay</a></li>
+                    <li><a href="index.html" data-i18n="nav_home">Trang Chủ</a></li>
+                    <li><a href="play.html" class="active" data-i18n="nav_play">Chơi Ngay</a></li>
                     <li><a href="about.html" data-i18n="nav_about">Giới Thiệu</a></li>
                     <li class="lang-switcher">
                         <select onchange="changeLang(this.value)" id="lang-select">
@@ -40,57 +40,21 @@
     </header>
 
     <main class="site-main">
-        <!-- Hero Section -->
-        <section class="hero-section">
-            <div class="container hero-container">
-                <div class="hero-content">
-                    <h1 data-i18n="hero_title">Học Toán Thật Vui!</h1>
-                    <p data-i18n="hero_desc">Nền tảng học tập tương tác giúp trẻ làm quen với những con số một cách tự
-                        nhiên nhất.</p>
-                    <a href="play.html" class="btn-hero" data-i18n="hero_btn">Bắt Đầu Ngay</a>
-                </div>
-                <div class="hero-image">
-                    <i class="fas fa-calculator"></i>
-                </div>
-            </div>
-        </section>
+        <div class="play-page-wrapper">
+            <div class="app-container">
+                <!-- App Header (Game Controls) -->
+                <header class="app-header">
+                    <button id="btn-back" class="icon-btn hidden"><i class="fas fa-arrow-left"></i></button>
+                    <div class="logo">Math Learner</div>
+                    <button id="btn-settings" class="icon-btn"><i class="fas fa-cog"></i></button>
+                </header>
 
-        <!-- Features Section -->
-        <section class="features-section container" style="padding: 80px 0;">
-            <div style="text-align: center; margin-bottom: 50px;">
-                <h2 style="font-size: 2.5rem; color: var(--text-color);" data-i18n="mission_title">Tại sao chọn Math
-                    Learner?</h2>
+                <!-- Main Content Area -->
+                <main id="main-content">
+                    <!-- Screens will be injected here by JavaScript -->
+                </main>
             </div>
-            <div class="about-content">
-                <div class="about-card">
-                    <div class="icon-box"><i class="fas fa-bolt"></i></div>
-                    <h3 data-i18n="method_title">Tương Tác Nhanh</h3>
-                    <p data-i18n="method_desc">Phản hồi tức thì giúp trẻ nhận biết đúng sai ngay lập tức.</p>
-                </div>
-                <div class="about-card">
-                    <div class="icon-box"><i class="fas fa-star"></i></div>
-                    <h3 data-i18n="age_title">Đa Dạng Cấp Độ</h3>
-                    <p data-i18n="age_desc">Từ cơ bản đến nâng cao, phù hợp với tiến trình học tập của trẻ.</p>
-                </div>
-                <div class="about-card">
-                    <div class="icon-box"><i class="fas fa-shield-alt"></i></div>
-                    <h3 data-i18n="dev_title">An Toàn & Miễn Phí</h3>
-                    <p data-i18n="dev_desc">Không quảng cáo, không thu phí, tập trung hoàn toàn vào việc học.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- CTA Section -->
-        <section class="cta-section"
-            style="background: var(--secondary-color); padding: 80px 0; border-radius: 50px; margin: 0 20px 80px; text-align: center; color: white;">
-            <div class="container">
-                <h2 style="font-size: 3rem; margin-bottom: 20px;" data-i18n="hero_title">Sẵn sàng để thử thách?</h2>
-                <p style="font-size: 1.3rem; margin-bottom: 40px; opacity: 0.9;" data-i18n="hero_desc">Hãy để bé bắt đầu
-                    hành trình chinh phục toán học ngay hôm nay!</p>
-                <a href="play.html" class="btn-hero" style="background: white; color: var(--secondary-color);"
-                    data-i18n="hero_btn">Chơi Ngay Bây Giờ</a>
-            </div>
-        </section>
+        </div>
     </main>
 
     <!-- Website Footer -->

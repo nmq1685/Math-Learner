@@ -72,16 +72,47 @@ const APP_DATA = {
     ]
 };
 
+const SITE_TRANSLATIONS = {
+    'nav_home': { vi: 'Trang Chủ', en: 'Home', ru: 'Главная' },
+    'nav_play': { vi: 'Chơi Ngay', en: 'Play Now', ru: 'Играть' },
+    'nav_about': { vi: 'Giới Thiệu', en: 'About', ru: 'О проекте' },
+    'hero_title': { vi: 'Học Toán Thật Vui!', en: 'Math is Fun!', ru: 'Математика - это весело!' },
+    'hero_desc': { vi: 'Nền tảng học tập tương tác giúp trẻ làm quen với những con số một cách tự nhiên nhất.', en: 'Interactive learning platform helping kids get familiar with numbers naturally.', ru: 'Интерактивная платформа, помогающая детям подружиться с числами.' },
+    'hero_btn': { vi: 'Bắt Đầu Ngay', en: 'Start Now', ru: 'Начать сейчас' },
+    'footer_desc': { vi: 'Ứng dụng học toán vui nhộn cho bé.', en: 'Fun math learning app for kids.', ru: 'Веселое приложение для изучения математики.' },
+    'footer_links': { vi: 'Liên Kết', en: 'Links', ru: 'Ссылки' },
+    'footer_contact': { vi: 'Liên Hệ', en: 'Contact', ru: 'Контакты' },
+    'footer_privacy': { vi: 'Chính Sách Bảo Mật', en: 'Privacy Policy', ru: 'Приватность' },
+    'about_page_title': { vi: 'Về Math Learner', en: 'About Math Learner', ru: 'О Math Learner' },
+    'about_hero_p': { vi: 'Khơi dậy niềm yêu thích toán học cho trẻ em thông qua các trò chơi tương tác thú vị.', en: 'Igniting a love for math through fun interactive games.', ru: 'Пробуждаем любовь к математике через веселые игры.' },
+    'mission_title': { vi: 'Sứ Mệnh Của Chúng Tôi', en: 'Our Mission', ru: 'Наша миссия' },
+    'mission_desc': { vi: 'Biến những con số khô khan trở thành niềm vui, giúp trẻ em tiếp cận toán học một cách tự nhiên.', en: 'Turning dry numbers into fun, helping kids approach math naturally.', ru: 'Превращаем сухие цифры в радость, помогая детям осваивать математику.' },
+    'method_title': { vi: 'Phương Pháp Học Tập', en: 'Learning Method', ru: 'Метод обучения' },
+    'method_desc': { vi: 'Kết hợp "Học mà chơi - Chơi mà học" với màu sắc và âm thanh sinh động.', en: 'Combining "Learning through play" with vibrant colors and sounds.', ru: 'Сочетание обучения с игрой, яркими цветами и звуками.' },
+    'age_title': { vi: 'Mọi Lứa Tuổi', en: 'All Ages', ru: 'Для всех возрастов' },
+    'age_desc': { vi: 'Từ phép tính đơn giản đến các thử thách tư duy phức tạp hơn.', en: 'From simple calculations to complex logic challenges.', ru: 'От простых вычислений до сложных логических задач.' },
+    'dev_title': { vi: 'Đội Ngũ Phát Triển', en: 'Development Team', ru: 'Команда разработчиков' },
+    'dev_desc': { vi: 'Dự án được xây dựng vì cộng đồng.', en: 'Project built for the community.', ru: 'Проект, созданный для сообщества.' },
+    'settings_title': { vi: 'Cài Đặt', en: 'Settings', ru: 'Настройки' },
+    'settings_lang': { vi: 'Ngôn ngữ:', en: 'Language:', ru: 'Язык:' },
+    'settings_close': { vi: 'Đóng', en: 'Close', ru: 'Закрыть' },
+    'result_great': { vi: 'Tuyệt vời!', en: 'Great Job!', ru: 'Отлично!' },
+    'result_score': { vi: 'Bạn đạt {score} / {total} điểm', en: 'You got {score} / {total} points', ru: 'Ваш счет: {score} / {total}' },
+    'btn_replay': { vi: 'Chơi lại', en: 'Replay', ru: 'Заново' },
+    'btn_menu': { vi: 'Trở về', en: 'Menu', ru: 'Меню' }
+};
+
 // GLOBAL STATE
 let state = {
-    lang: 'vi',
+    lang: localStorage.getItem('math_learner_lang') || 'en',
     currentSection: null,
     currentLevel: null,
     score: 0,
     totalQuestions: 10,
     currentQuestionIndex: 0,
     currQuestion: null,
-    userInput: ''
+    userInput: '',
+    isAnswerLocked: false
 };
 
 // AUDIO SYSTEM (Web Audio API)
@@ -396,6 +427,7 @@ const startGame = (section, level) => {
     state.score = 0;
     state.currentQuestionIndex = 0;
     state.userInput = '';
+    state.isAnswerLocked = false;
 
     renderGameScreen();
     nextQuestion();
@@ -411,11 +443,13 @@ const renderGameScreen = () => {
                 <span>Score: <span id="score-display">0</span></span>
             </div>
             
-            <div id="game-question-container" style="width:100%; text-align:center;">
-                <!-- Content Injected Here -->
-            </div>
+            <div class="game-body">
+                <div id="game-question-container">
+                    <!-- Content Injected Here -->
+                </div>
 
-            <div id="keypad-container"></div>
+                <div id="keypad-container"></div>
+            </div>
         </div>
     `;
 
@@ -463,6 +497,7 @@ const nextQuestion = () => {
 
     state.currentQuestionIndex++;
     state.userInput = '';
+    state.isAnswerLocked = false;
     state.currQuestion = generateQuestion(state.currentSection.id, state.currentLevel.id);
 
     const container = document.getElementById('game-question-container');
@@ -535,54 +570,95 @@ const updateDisplay = () => {
 }
 
 const handleCheck = () => {
+    // Prevent double-checking if answer is already locked
+    if (state.isAnswerLocked) return;
     if (!state.userInput) return;
 
     if (state.userInput === state.currQuestion.ans) {
+        // Lock the answer to prevent multiple checks
+        state.isAnswerLocked = true;
+
         // Correct
         playSound('sound-correct');
         state.score++;
         document.getElementById('score-display').innerText = state.score;
-        showFeedback(true);
+
+        // Show success message
+        const msg = { 'vi': 'Chính xác! 🎉', 'en': 'Correct! 🎉', 'ru': 'Верно! 🎉' }[state.lang];
+        showToast(msg, 'success');
+
+        // Move to next question
+        setTimeout(() => {
+            nextQuestion();
+        }, 1200);
     } else {
         // Wrong
         playSound('sound-wrong');
         const disp = document.getElementById('answer-display');
         disp.classList.add('shake');
+
+        // Show error message
+        const errMsg = { 'vi': 'Sai rồi, thử lại!', 'en': 'Wrong, try again!', 'ru': 'Неверно, повторите!' }[state.lang];
+        showToast(errMsg, 'error');
+
         setTimeout(() => disp.classList.remove('shake'), 500);
-        showFeedback(false);
     }
 }
 
-const showFeedback = (isCorrect) => {
-    // Show Toast for Check
-    if (isCorrect) {
-        let msg = 'Correct! 🎉';
-        if (state.lang === 'vi') msg = 'Chính xác! 🎉';
-        if (state.lang === 'ru') msg = 'Верно! 🎉';
-        showToast(msg, 'success');
-    }
+const applyTranslations = () => {
+    // Translate static elements with data-i18n attribute
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (SITE_TRANSLATIONS[key]) {
+            el.innerText = SITE_TRANSLATIONS[key][state.lang];
+        }
+    });
 
-    // Simple delay for flow
-    setTimeout(() => {
-        nextQuestion();
-    }, 1000);
+    // Update select dropdown if it exists
+    const select = document.getElementById('lang-select');
+    if (select) select.value = state.lang;
+}
+
+window.changeLang = (lang) => {
+    state.lang = lang;
+    localStorage.setItem('math_learner_lang', lang);
+    playSound('sound-click');
+
+    // Close modal if it was open (from game settings)
+    const modal = document.getElementById('modal-overlay');
+    if (modal) modal.classList.add('hidden');
+
+    applyTranslations();
+
+    // If we're in a game or section, we might need to re-render to update dynamic content
+    if (state.currentLevel) {
+        renderGameScreen();
+        // and current question text needs update if it was generated
+        if (state.currQuestion) {
+            // Regeneration might change the question, maybe just update text if possible?
+            // For now, let's keep it simple and re-render the current screen
+            nextQuestion();
+        }
+    } else if (state.currentSection) {
+        renderLevels(state.currentSection);
+    } else {
+        renderHome();
+    }
 }
 
 const showToast = (message, type = 'success') => {
     const container = document.getElementById('toast-container');
-    if (!container) return; // Guard clause
+    if (!container) return;
 
     const toast = document.createElement('div');
     toast.className = `toast toast-${type}`;
-    toast.innerHTML = `
-        <i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-times-circle'}"></i>
-        <span>${message}</span>
-    `;
+    toast.innerHTML = `<i class="fas fa-${type === 'success' ? 'check-circle' : 'times-circle'}"></i> ${message}`;
+
     container.appendChild(toast);
 
-    // Remove after animation (2s total)
+    // Auto remove after animation
     setTimeout(() => {
-        if (toast.parentElement) toast.remove();
+        toast.remove();
     }, 2000);
 }
 
@@ -590,30 +666,25 @@ const finishGame = () => {
     playSound('sound-win');
     const main = document.getElementById('main-content');
 
-    let msg, sub;
-    if (state.lang === 'vi') {
-        msg = 'Tuyệt vời!';
-        sub = `Bạn đạt ${state.score} / ${state.totalQuestions} điểm`;
-    } else if (state.lang === 'ru') {
-        msg = 'Отлично!';
-        sub = `Ваш счет: ${state.score} / ${state.totalQuestions}`;
-    } else {
-        msg = 'Great Job!';
-        sub = `You got ${state.score} / ${state.totalQuestions}`;
-    }
+    const msg = SITE_TRANSLATIONS['result_great'][state.lang];
+    const sub = SITE_TRANSLATIONS['result_score'][state.lang]
+        .replace('{score}', state.score)
+        .replace('{total}', state.totalQuestions);
 
     main.innerHTML = `
-        <div style="text-align:center; padding-top: 50px;">
-            <i class="fas fa-trophy" style="font-size: 5rem; color: #fab1a0; margin-bottom:20px; display:block;"></i>
-            <h1 style="color: var(--text-color)">${msg}</h1>
-            <p style="font-size: 1.2rem; color: #636e72">${sub}</p>
+        <div class="result-screen">
+            <i class="fas fa-trophy trophy-icon"></i>
+            <h1 class="result-title">${msg}</h1>
+            <p class="result-subtitle">${sub}</p>
             
-            <button class="btn-primary" onclick="renderHome()" style="margin-top:30px;">
-                <i class="fas fa-home"></i> Menu
-            </button>
-             <button class="btn-primary" onclick="startGame(state.currentSection, state.currentLevel)" style="background:var(--primary-color); margin-left: 10px;">
-                <i class="fas fa-redo"></i> Replay
-            </button>
+            <div class="result-actions">
+                <button class="btn-primary" onclick="renderHome()">
+                    <i class="fas fa-home"></i> ${SITE_TRANSLATIONS['btn_menu'][state.lang]}
+                </button>
+                 <button class="btn-primary" onclick="startGame(state.currentSection, state.currentLevel)" style="background:var(--primary-color);">
+                    <i class="fas fa-redo"></i> ${SITE_TRANSLATIONS['btn_replay'][state.lang]}
+                </button>
+            </div>
         </div>
     `;
     renderHeader(false);
@@ -626,24 +697,14 @@ const showSettingsModal = () => {
     const msg = document.getElementById('modal-message');
     const actions = document.querySelector('.modal-actions');
 
-    // Mapping for UI text
-    const uiText = {
-        vi: { title: 'Cài đặt', msg: 'Chọn ngôn ngữ / Language:', close: 'Đóng' },
-        en: { title: 'Settings', msg: 'Choose Language:', close: 'Close' },
-        ru: { title: 'Настройки', msg: 'Выберите язык:', close: 'Закрыть' }
-    };
-
-    // Fallback if lang undefined (shouldn't happen)
-    const t = uiText[state.lang] || uiText.en;
-
-    title.innerText = t.title;
-    msg.innerText = t.msg;
+    title.innerText = SITE_TRANSLATIONS['settings_title'][state.lang];
+    msg.innerText = SITE_TRANSLATIONS['settings_lang'][state.lang];
 
     actions.innerHTML = `
         <button class="btn-primary" onclick="changeLang('vi')" style="width:100%; margin-bottom:10px;">Tiếng Việt 🇻🇳</button>
         <button class="btn-primary" onclick="changeLang('en')" style="width:100%; margin-bottom:10px; background:#74b9ff;">English 🇬🇧</button>
         <button class="btn-primary" onclick="changeLang('ru')" style="width:100%; background:#a29bfe;">Русский 🇷🇺</button>
-        <button class="btn-primary" onclick="closeModal()" style="width:100%; background:#b2bec3; margin-top:20px;">${t.close}</button>
+        <button class="btn-primary" onclick="closeModal()" style="width:100%; background:#b2bec3; margin-top:20px;">${SITE_TRANSLATIONS['settings_close'][state.lang]}</button>
     `;
 
     overlay.classList.remove('hidden');
@@ -654,35 +715,54 @@ const closeModal = () => {
     playSound('sound-click');
 }
 
-window.changeLang = (lang) => {
-    state.lang = lang;
-    playSound('sound-click');
-    closeModal();
-    // Refresh to apply changes
-    renderHome();
-}
-// Expose to window for onclick handlers
+// Expose to window for onclick handlers (most are already exposed by being global functions)
 window.closeModal = closeModal;
 
 // NAVIGATION
-document.getElementById('btn-settings').addEventListener('click', () => {
-    playSound('sound-click');
-    showSettingsModal();
-});
+const settingsBtn = document.getElementById('btn-settings');
+if (settingsBtn) {
+    settingsBtn.addEventListener('click', () => {
+        playSound('sound-click');
+        showSettingsModal();
+    });
+}
 
-document.getElementById('btn-back').addEventListener('click', () => {
-    playSound('sound-click');
-    if (state.currentLevel) {
-        // If in game, go back to level select
-        renderLevels(state.currentSection);
-        state.currentLevel = null;
-    } else if (state.currentSection) {
-        // If in Level Select, go to Home
-        renderHome();
-    }
-});
+const backBtn = document.getElementById('btn-back');
+if (backBtn) {
+    backBtn.addEventListener('click', () => {
+        playSound('sound-click');
+        if (state.currentLevel) {
+            // If in game, go back to level select
+            renderLevels(state.currentSection);
+            state.currentLevel = null;
+        } else if (state.currentSection) {
+            // If in Level Select, go to Home
+            renderHome();
+        }
+    });
+}
 
 // INIT
 document.addEventListener('DOMContentLoaded', () => {
-    renderHome();
+    applyTranslations();
+
+    // Set mobile menu toggle
+    const toggle = document.querySelector('.mobile-menu-toggle');
+    const nav = document.querySelector('.site-nav');
+    if (toggle && nav) {
+        toggle.addEventListener('click', () => {
+            nav.classList.toggle('active');
+        });
+    }
+
+    // sync language select dropdown if exists
+    const langSelect = document.getElementById('lang-select');
+    if (langSelect) {
+        langSelect.value = state.lang;
+    }
+
+    // Only initialize game if main-content exists
+    if (document.getElementById('main-content')) {
+        renderHome();
+    }
 });
